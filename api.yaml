@@ -1,0 +1,72 @@
+openapi: 3.0.0 
+info: 
+  title: Quote Keeper
+  description: Quotes for self improvement or just to make your day better.
+  version: 0.1.0
+
+
+servers: 
+  - url: http://0.0.0.0:1000/api/v1
+
+paths: 
+  /health:
+    get: 
+      summary: Health check for liveness probes 
+      responses:
+        "200": 
+          description: Ok 
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: 
+                    type: string
+        "500": 
+          $ref: "#/components/responses/Error"
+
+  /quotes: 
+    get: 
+      summary: Get a quote from the specified category 
+      parameters: 
+        - name: category
+          in: path
+          description: Category of quote. If not specified, will be random. 
+          required: true
+          schema: 
+            type: string # This should be an enum of known categories
+
+      responses: 
+        "200": 
+          description: A json array with a list of quotes 
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    Quote: 
+                      type: string 
+                      example: Do or do not, there is no try
+                    Author: 
+                      type: string 
+                      example: Master Yoda 
+                    Categories: 
+                      type: string                                  # this should be list not string 
+                      example: Movie, Motivation, Star Wars
+
+components: 
+  responses:   
+    Error: 
+      description: Some error
+      content:  
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: There was an error 
+            required: 
+              - message 
