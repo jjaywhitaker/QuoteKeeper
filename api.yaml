@@ -30,11 +30,27 @@ paths:
       summary: Get a quote from the specified category 
       parameters: 
         - name: category
-          in: path
+          in: query
           description: Category of quote. If not specified, will be random. 
-          required: true
+          required: false
           schema: 
             type: string # This should be an enum of known categories
+        - name: quoteCount
+          in: query
+          description: How many quotes to return
+          required: true
+          schema:
+            type: number
+            maximum: 10
+            minimum: 1
+            default: 1 
+        - name: attributed
+          in: query
+          description: Do I only want quotes with attributed authors 
+          required: false
+          schema:
+            type: boolean
+            default: false
 
       responses: 
         "200": 
