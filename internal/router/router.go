@@ -1,11 +1,11 @@
 package router
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	pg "github.com/jjaywhitaker/QuoteKeeper/internal/dao/postgres"
-	"github.com/jjaywhitaker/QuoteKeeper/internal/model"
 )
 
 type router interface {
@@ -32,12 +32,12 @@ func (r apiRouter) healthCheck(c *gin.Context) {
 }
 
 func (r apiRouter) getQuotes(c *gin.Context) {
-	r.pgDao.GetQuote()
+	cat := c.Query("category")
+	log.Printf("Getting quote for category: %v", cat)
+	quote, err := r.pgDao.GetRandomQuoteByCategory(cat)
+	if err != nil {
 
-	quotes := model.QuoteResponse{
-		Quote:      "Hello world",
-		Author:     "Me",
-		Categories: []string{"Random"},
 	}
-	c.IndentedJSON(http.StatusOK, quotes)
+
+	c.IndentedJSON(http.StatusOK, quote)
 }

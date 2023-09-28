@@ -35,22 +35,23 @@ paths:
           required: false
           schema: 
             type: string # This should be an enum of known categories
-        - name: quoteCount
-          in: query
-          description: How many quotes to return
-          required: true
-          schema:
-            type: number
-            maximum: 10
-            minimum: 1
-            default: 1 
-        - name: attributed
-          in: query
-          description: Do I only want quotes with attributed authors 
-          required: false
-          schema:
-            type: boolean
-            default: false
+            default: Random
+        # - name: quoteCount
+        #   in: query
+        #   description: How many quotes to return
+        #   required: true
+        #   schema:
+        #     type: number
+        #     maximum: 10
+        #     minimum: 1
+        #     default: 1 
+        # - name: attributed
+        #   in: query
+        #   description: Do I only want quotes with attributed authors 
+        #   required: false
+        #   schema:
+        #     type: boolean
+        #     default: false
 
       responses: 
         "200": 
