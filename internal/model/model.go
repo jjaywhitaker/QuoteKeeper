@@ -1,7 +1,7 @@
 package model
 
 type QuoteResponse struct {
-	Quote      string
-	Author     string
-	Categories []string
+	Body       string   `json:"body"`
+	Author     string   `json:"author"`
+	Categories []string `json:"categories"`
 }

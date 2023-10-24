@@ -32,10 +32,10 @@ paths:
         - name: category
           in: query
           description: Category of quote. If not specified, will be random. 
-          required: false
+          required: true
           schema: 
             type: string # This should be an enum of known categories
-            default: Random
+            enum: [Random, Exercise, Habits, Relationships, Business, Faith, Discipline, Kindness]
         # - name: quoteCount
         #   in: query
         #   description: How many quotes to return
